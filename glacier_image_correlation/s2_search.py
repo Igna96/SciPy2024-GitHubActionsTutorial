@@ -65,7 +65,7 @@ def main():
     print(f"Returned {len(items)} Items")
     
     # create xarray dataset without loading data
-    sentinel2_stack = stackstac.stack(items, epsg=32645)
+    sentinel2_stack = stackstac.stack(items, epsg=32645, assets=["B02", "B03", "B04", "B08"])
     # filter to specified month range
     sentinel2_stack_snowoff = sentinel2_stack.where((sentinel2_stack.time.dt.month >= int(args.start_month)) & (sentinel2_stack.time.dt.month <= int(args.stop_month)), drop=True)
     
