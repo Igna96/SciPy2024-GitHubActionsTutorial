@@ -63,6 +63,12 @@ def main():
     # Check how many items were returned
     items = search.item_collection()
     print(f"Returned {len(items)} Items")
+
+    valid_items = [
+    item for item in items
+    if item.get('properties', {}).get('proj:bbox') is not None and
+       item.get('properties', {}).get('proj:transform') is not None
+    ]
     
     # create xarray dataset without loading data
     sentinel2_stack = stackstac.stack(items, epsg=32645, assets=["B02", "B03", "B04", "B08"])
